@@ -15,9 +15,9 @@ connectDB();
 const app = express();
 
 // This is the final, correct line
-app.use(cors({ origin: process.env.CORS_ORIGION })); 
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
-app.use(express.json()); 
+app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
@@ -29,6 +29,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
