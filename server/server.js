@@ -13,31 +13,10 @@ import swapRoutes from "./routes/swaps.js";
 connectDB();
 
 const app = express();
-// --- New diagnostic CORS configuration ---
 
-// 1. LOG THE ENVIRONMENT VARIABLE TO SEE WHAT THE SERVER IS READING
-const corsEnvVar = process.env.CORS_ORIGIN;
-console.log('--- SERVER STARTUP: process.env.CORS_ORIGIN is:', corsEnvVar);
+// This is the final, correct line
+app.use(cors({ origin: process.env.CORS_ORIGION })); 
 
-const allowedOrigins = [corsEnvVar];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    
-    // 2. LOG THE INCOMING REQUEST
-    console.log('--- INCOMING REQUEST ORIGIN:', origin);
-
-    // Allow requests with no origin (like health checks)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin: ' + origin;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
-// --- End of new CORS code ---
 app.use(express.json()); 
 
 app.use("/api/auth", authRoutes);
